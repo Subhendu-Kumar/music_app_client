@@ -1,0 +1,133 @@
+import 'package:client/core/widgets/custom_field.dart';
+import 'package:client/core/theme/pallete.dart';
+import 'package:client/features/auth/view/pages/signin_page.dart';
+import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
+import 'package:flutter/material.dart';
+
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final isLoading = ref
+    //     .watch(authViewModelProvider.select((val) => val?.isLoading == true));
+
+    // ref.listen(
+    //   authViewModelProvider,
+    //   (_, next) {
+    //     next?.when(
+    //       data: (data) {
+    //         showSnackBar(
+    //           context,
+    //           'Account created successfully! Please  login.',
+    //         );
+    //         Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => const LoginPage(),
+    //           ),
+    //         );
+    //       },
+    //       error: (error, st) {
+    //         showSnackBar(context, error.toString());
+    //       },
+    //       loading: () {},
+    //     );
+    //   },
+    // );
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Sign Up.',
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 30),
+                  CustomField(hintText: 'Name', controller: _nameController),
+                  const SizedBox(height: 15),
+                  CustomField(hintText: 'Email', controller: _emailController),
+                  const SizedBox(height: 15),
+                  CustomField(
+                    hintText: 'Password',
+                    controller: _passwordController,
+                    isObscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  AuthGradientButton(
+                    buttonText: 'Sign up',
+                    onTap: () async {
+                      // if (formKey.currentState!.validate()) {
+                      //   await ref
+                      //       .read(authViewModelProvider.notifier)
+                      //       .signUpUser(
+                      //         name: nameController.text,
+                      //         email: emailController.text,
+                      //         password: passwordController.text,
+                      //       );
+                      // } else {
+                      //   showSnackBar(context, 'Missing fields!');
+                      // }
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SigninPage(),
+                        ),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Already have an account? ',
+                        style: Theme.of(context).textTheme.titleMedium,
+                        children: const [
+                          TextSpan(
+                            text: 'Sign In',
+                            style: TextStyle(
+                              color: Pallete.gradient2,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

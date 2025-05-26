@@ -5,6 +5,7 @@ import 'package:client/core/widgets/loader.dart';
 import 'package:client/features/auth/view/pages/signup_page.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client/features/auth/view_model/auth_view_model.dart';
+import 'package:client/features/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,7 +40,7 @@ class _SigninPageState extends ConsumerState<SigninPage> {
           showSnackBar(context, 'Signin successfully!');
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const Scaffold()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
             (_) => false,
           );
         },

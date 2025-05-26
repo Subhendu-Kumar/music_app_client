@@ -70,4 +70,29 @@ class AuthRemoteRepository {
       );
     }
   }
+
+  Future<Either<AppFailure, UserModel>> getCurrentUserData(String token) async {
+    try {
+      final res = await http.get(
+        Uri.parse('${ServerConstant.serverURL}/auth/user'),
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": "Bearer $token",
+        },
+      );
+      final resBodyMap = jsonDecode(res.body) as Map<String, dynamic>;
+      if (res.statusCode != 200) {
+        return left(
+          AppFailure(
+            "Failed to sign in: ${res.statusCode} - ${resBodyMap["detail"] ?? "Unknown error"}",
+          ),
+        );
+      }
+      return right(UserModel.fromMap(resBodyMap).copyWith(accessToken: token));
+    } catch (e) {
+      return left(
+        AppFailure("An error occurred while signing in: ${e.toString()}"),
+      );
+    }
+  }
 }

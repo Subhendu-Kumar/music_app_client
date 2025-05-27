@@ -1,15 +1,14 @@
 import 'dart:io';
-
-import 'package:client/core/theme/pallete.dart';
+import 'package:flutter/material.dart';
 import 'package:client/core/utils.dart';
-import 'package:client/core/widgets/custom_field.dart';
+import 'package:client/core/theme/pallete.dart';
 import 'package:client/core/widgets/loader.dart';
+import 'package:client/core/widgets/custom_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:client/features/home/view/pages/home_page.dart';
 import 'package:client/features/home/view/widgets/audio_wave.dart';
 import 'package:client/features/home/view_model/home_view_model.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SognUploadPage extends ConsumerStatefulWidget {
   const SognUploadPage({super.key});

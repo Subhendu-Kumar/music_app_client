@@ -1,22 +1,22 @@
-import 'package:client/core/providers/current_user_notifier.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:client/features/auth/model/user_model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:client/core/providers/current_user_notifier.dart';
 import 'package:client/features/auth/repositories/auth_local_repository.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_view_model.g.dart';
 
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
-  late AuthRemoteRepository _authRemoteRepository;
   late AuthLocalRepository _authLocalRepository;
   late CurrentUserNotifier _currentUserNotifier;
+  late AuthRemoteRepository _authRemoteRepository;
 
   @override
   AsyncValue<UserModel>? build() {
-    _authRemoteRepository = ref.watch(authRemoteRepositoryProvider);
     _authLocalRepository = ref.watch(authLocalRepositoryProvider);
+    _authRemoteRepository = ref.watch(authRemoteRepositoryProvider);
     _currentUserNotifier = ref.watch(currentUserNotifierProvider.notifier);
     return null;
   }

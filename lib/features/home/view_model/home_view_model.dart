@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:client/core/providers/current_user_notifier.dart';
-import 'package:client/core/utils.dart';
-import 'package:client/features/home/repositories/home_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:flutter/material.dart';
+import 'package:client/core/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:client/core/providers/current_user_notifier.dart';
+import 'package:client/features/home/repositories/home_repository.dart';
 
 part 'home_view_model.g.dart';
 
@@ -20,22 +19,22 @@ class HomeViewModel extends _$HomeViewModel {
   }
 
   Future<void> uploadSong({
+    required String artist,
+    required String songName,
     required File selectedAudio,
     required File selectedImage,
-    required String songName,
-    required String artist,
     required Color selectedColor,
   }) async {
     state = const AsyncValue.loading();
     final hexColor = rgbToHex(selectedColor);
     final token = ref.read(currentUserNotifierProvider)!.accessToken;
     final res = await _homeRepository.uploadSongData(
+      token: token,
+      artist: artist,
+      songName: songName,
+      hexColor: hexColor,
       selectedAudio: selectedAudio,
       selectedImage: selectedImage,
-      songName: songName,
-      artist: artist,
-      hexColor: hexColor,
-      token: token,
     );
     final val = switch (res) {
       Left(value: final l) =>

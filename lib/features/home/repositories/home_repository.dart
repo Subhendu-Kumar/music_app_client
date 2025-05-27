@@ -1,9 +1,8 @@
 import 'dart:io';
-
-import 'package:client/core/constants/server_constant.dart';
-import 'package:client/core/failure/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:client/core/failure/failure.dart';
+import 'package:client/core/constants/server_constant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_repository.g.dart';
@@ -15,12 +14,12 @@ HomeRepository homeRepository(HomeRepositoryRef ref) {
 
 class HomeRepository {
   Future<Either<AppFailure, String>> uploadSongData({
-    required File selectedAudio,
-    required File selectedImage,
-    required String songName,
+    required String token,
     required String artist,
     required String hexColor,
-    required String token,
+    required String songName,
+    required File selectedImage,
+    required File selectedAudio,
   }) async {
     try {
       final request = http.MultipartRequest(

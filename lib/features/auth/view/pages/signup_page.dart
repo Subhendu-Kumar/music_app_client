@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:client/core/utils.dart';
-import 'package:client/core/widgets/custom_field.dart';
 import 'package:client/core/theme/pallete.dart';
 import 'package:client/core/widgets/loader.dart';
-import 'package:client/features/auth/view/pages/signin_page.dart';
-import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/auth/view_model/auth_view_model.dart';
-import 'package:flutter/material.dart';
+import 'package:client/core/widgets/custom_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:client/features/auth/view/pages/signin_page.dart';
+import 'package:client/features/auth/view_model/auth_view_model.dart';
+import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
 
 class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
@@ -16,10 +16,10 @@ class SignupPage extends ConsumerStatefulWidget {
 }
 
 class _SignupPageState extends ConsumerState<SignupPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {

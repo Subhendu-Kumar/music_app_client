@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CustomField extends StatelessWidget {
-  final String hintText;
-  final TextEditingController? controller;
-  final bool isObscureText;
   final bool readOnly;
+  final String hintText;
+  final bool isObscureText;
   final VoidCallback? onTap;
+  final TextEditingController? controller;
+
   const CustomField({
     super.key,
+    this.onTap,
+    this.readOnly = false,
     required this.hintText,
     required this.controller,
     this.isObscureText = false,
-    this.readOnly = false,
-    this.onTap,
   });
 
   @override

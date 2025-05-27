@@ -6,21 +6,37 @@ part of 'home_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeViewModelHash() => r'7e6066f4b51ed70b1b7ed94010f2c1712d30c5ca';
+String _$listAllSongsHash() => r'3939c9d7325c2be3dadf787e15ecf49bc2c5f55e';
+
+/// See also [listAllSongs].
+@ProviderFor(listAllSongs)
+final listAllSongsProvider =
+    AutoDisposeFutureProvider<List<SongModel>>.internal(
+  listAllSongs,
+  name: r'listAllSongsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$listAllSongsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ListAllSongsRef = AutoDisposeFutureProviderRef<List<SongModel>>;
+String _$homeViewModelHash() => r'c4e43d95994c70ce70ebe0d86e4d6ad190505e3b';
 
 /// See also [HomeViewModel].
 @ProviderFor(HomeViewModel)
 final homeViewModelProvider =
     AutoDisposeNotifierProvider<HomeViewModel, AsyncValue?>.internal(
-      HomeViewModel.new,
-      name: r'homeViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$homeViewModelHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  HomeViewModel.new,
+  name: r'homeViewModelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$homeViewModelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$HomeViewModel = AutoDisposeNotifier<AsyncValue?>;
 // ignore_for_file: type=lint

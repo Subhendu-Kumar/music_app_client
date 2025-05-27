@@ -14,10 +14,9 @@ String _$authLocalRepositoryHash() =>
 final authLocalRepositoryProvider = Provider<AuthLocalRepository>.internal(
   authLocalRepository,
   name: r'authLocalRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$authLocalRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authLocalRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

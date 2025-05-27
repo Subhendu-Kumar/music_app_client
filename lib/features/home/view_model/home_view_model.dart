@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:client/core/failure/failure.dart';
+import 'package:client/features/home/model/song_model.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/utils.dart';
@@ -7,6 +9,18 @@ import 'package:client/core/providers/current_user_notifier.dart';
 import 'package:client/features/home/repositories/home_repository.dart';
 
 part 'home_view_model.g.dart';
+
+@riverpod
+Future<List<SongModel>> listAllSongs(ListAllSongsRef ref) async {
+  final token = ref.watch(currentUserNotifierProvider)!.accessToken;
+  final res = ref.watch(homeRepositoryProvider).listAllSongs(token: token);
+  return switch (res) {
+    Left(value: final l) => throw l.message,
+    Right(value: final r) => r,
+    // TODO: Handle this case.
+    Future<Either<AppFailure, List<SongModel>>>() => throw UnimplementedError(),
+  };
+}
 
 @riverpod
 class HomeViewModel extends _$HomeViewModel {

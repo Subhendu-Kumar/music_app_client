@@ -24,4 +24,8 @@ class AuthLocalRepository {
   String? getAccessToken() {
     return _sharedPreferences.getString("x-auth-token");
   }
+
+  void clearAccessToken() {
+    _sharedPreferences.remove('x-auth-token');
+  }
 }

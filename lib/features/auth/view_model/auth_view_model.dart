@@ -1,3 +1,4 @@
+import 'package:client/core/failure/failure.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:client/features/auth/model/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -73,14 +74,27 @@ class AuthViewModel extends _$AuthViewModel {
     if (accessToken != null) {
       final res = await _authRemoteRepository.getCurrentUserData(accessToken);
       final val = switch (res) {
-        Left(value: final l) =>
-          state = AsyncValue.error(l.message, StackTrace.current),
+        Left(value: final l) => _getCurrentUserFailure(l.message, l),
         Right(value: final r) => _getCurrentUserSuccess(r),
       };
       print(val);
       return val.value;
     }
     return null;
+  }
+
+  AsyncValue<UserModel> _getCurrentUserFailure(
+    String message,
+    AppFailure failure,
+  ) {
+    if (message.contains('401') ||
+        message.toLowerCase().contains('unauthorized') ||
+        message.toLowerCase().contains('token')) {
+      _authLocalRepository.clearAccessToken();
+      _currentUserNotifier.addUser(null);
+    }
+    _currentUserNotifier.addUser(null);
+    return state = AsyncValue.error(message, StackTrace.current);
   }
 
   AsyncValue<UserModel> _getCurrentUserSuccess(UserModel user) {

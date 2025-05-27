@@ -7,21 +7,20 @@ part of 'current_user_notifier.dart';
 // **************************************************************************
 
 String _$currentUserNotifierHash() =>
-    r'002b81f154e99725514361878fb229b209e96ce9';
+    r'b731297b160187e3b42d184d75c20a9275d76f62';
 
 /// See also [CurrentUserNotifier].
 @ProviderFor(CurrentUserNotifier)
 final currentUserNotifierProvider =
     NotifierProvider<CurrentUserNotifier, UserModel?>.internal(
-      CurrentUserNotifier.new,
-      name: r'currentUserNotifierProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$currentUserNotifierHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CurrentUserNotifier.new,
+  name: r'currentUserNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentUserNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CurrentUserNotifier = Notifier<UserModel?>;
 // ignore_for_file: type=lint

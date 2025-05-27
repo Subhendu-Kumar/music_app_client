@@ -6,21 +6,20 @@ part of 'auth_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authViewModelHash() => r'f807843206a1c4e2cbcbecd13d6c0ebe281d78dd';
+String _$authViewModelHash() => r'967402cc2606cf2e9d3f2cc6b66bbfa2de233163';
 
 /// See also [AuthViewModel].
 @ProviderFor(AuthViewModel)
 final authViewModelProvider =
     AutoDisposeNotifierProvider<AuthViewModel, AsyncValue<UserModel>?>.internal(
-      AuthViewModel.new,
-      name: r'authViewModelProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$authViewModelHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  AuthViewModel.new,
+  name: r'authViewModelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authViewModelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$AuthViewModel = AutoDisposeNotifier<AsyncValue<UserModel>?>;
 // ignore_for_file: type=lint

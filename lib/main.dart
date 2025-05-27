@@ -25,7 +25,8 @@ class MyApp extends ConsumerWidget {
       title: 'Music App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      home: currentUser == null ? const SigninPage() : SognUploadPage(),
+      // home: SigninPage(),
+      home: currentUser == null ? const SigninPage() : const SognUploadPage(),
     );
   }
 }

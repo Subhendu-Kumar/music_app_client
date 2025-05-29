@@ -6,7 +6,7 @@ part of 'home_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$listAllSongsHash() => r'3939c9d7325c2be3dadf787e15ecf49bc2c5f55e';
+String _$listAllSongsHash() => r'45f68a0af8548cf3743f2c51c0db13d13013c863';
 
 /// See also [listAllSongs].
 @ProviderFor(listAllSongs)

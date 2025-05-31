@@ -43,6 +43,10 @@ dependencies:
   flex_color_picker: ^3.7.1
   audio_waveforms: ^1.3.0
   just_audio: ^0.10.3
+  hive: ^4.0.0-dev.2
+  isar_flutter_libs: ^4.0.0-dev.13
+  path_provider: ^2.1.0
+  just_audio_background: ^0.0.1-beta.17
 
 dev_dependencies:
   flutter_test:

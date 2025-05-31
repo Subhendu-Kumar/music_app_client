@@ -10,13 +10,92 @@ class SongsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final recentlyPlayedSongs =
+        ref.watch(homeViewModelProvider.notifier).getRecentlyPlayedSongs();
+
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            recentlyPlayedSongs.isEmpty
+                ? const SizedBox()
+                : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Recently Played!",
+                      style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      height: recentlyPlayedSongs.length * 36.0,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 200,
+                              childAspectRatio: 3,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                            ),
+                        itemCount: recentlyPlayedSongs.length,
+                        itemBuilder: (context, index) {
+                          final recentSong = recentlyPlayedSongs[index];
+                          return GestureDetector(
+                            onTap: () {
+                              ref
+                                  .read(currentSongNotifierProvider.notifier)
+                                  .updateSong(recentSong);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                color: Pallete.cardColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 56,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          recentSong.thumbnail,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    recentSong.song_name,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
             Text(
               "Latest Today!",
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700),

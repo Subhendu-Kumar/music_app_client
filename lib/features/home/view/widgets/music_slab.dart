@@ -20,7 +20,9 @@ class MusicSlab extends ConsumerWidget {
 
     return Stack(
       children: [
-        Container(
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
           height: 65,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
@@ -35,9 +37,25 @@ class MusicSlab extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MusicPlayer();
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return const MusicPlayer();
+                      },
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) {
+                        final tween = Tween(
+                          begin: Offset(0, 1),
+                          end: Offset.zero,
+                        ).chain(CurveTween(curve: Curves.easeInOut));
+                        final offSetAnimation = animation.drive(tween);
+                        return SlideTransition(
+                          position: offSetAnimation,
+                          child: child,
+                        );
                       },
                     ),
                   );
@@ -45,14 +63,17 @@ class MusicSlab extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 45,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(currentSong.thumbnail),
-                          fit: BoxFit.cover,
+                    Hero(
+                      tag: "${currentSong.id}_image",
+                      child: Container(
+                        width: 45,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(currentSong.thumbnail),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        borderRadius: BorderRadius.circular(4),
                       ),
                     ),
                     const SizedBox(width: 8),

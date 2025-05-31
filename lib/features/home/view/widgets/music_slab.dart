@@ -5,6 +5,7 @@ import 'package:client/core/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:client/core/providers/current_song_notifier.dart';
 import 'package:client/features/home/view/widgets/music_player.dart';
+import 'package:client/features/home/view_model/home_view_model.dart';
 
 class MusicSlab extends ConsumerWidget {
   const MusicSlab({super.key});
@@ -104,7 +105,11 @@ class MusicSlab extends ConsumerWidget {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await ref
+                          .read(homeViewModelProvider.notifier)
+                          .favSong(songId: currentSong.id);
+                    },
                     icon: const Icon(
                       Icons.favorite_border_outlined,
                       color: Pallete.whiteColor,

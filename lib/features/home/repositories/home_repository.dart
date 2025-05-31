@@ -78,4 +78,54 @@ class HomeRepository {
       return left(AppFailure(e.toString()));
     }
   }
+
+  Future<Either<AppFailure, bool>> favSong({
+    required String token,
+    required String songId,
+  }) async {
+    try {
+      final res = await http.post(
+        Uri.parse("${ServerConstant.serverURL}/song/fav?song_id=$songId"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+      var resBodyMap = jsonDecode(res.body);
+      if (res.statusCode != 201) {
+        resBodyMap = resBodyMap as Map<String, dynamic>;
+        return left(AppFailure(resBodyMap["detail"]));
+      }
+      return right(resBodyMap["message"]);
+    } catch (e) {
+      return left(AppFailure(e.toString()));
+    }
+  }
+
+  Future<Either<AppFailure, List<SongModel>>> listFavSongs({
+    required String token,
+  }) async {
+    try {
+      final res = await http.get(
+        Uri.parse("${ServerConstant.serverURL}/song/fav"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+      var resBodyMap = jsonDecode(res.body);
+      if (res.statusCode != 200) {
+        resBodyMap = resBodyMap as Map<String, dynamic>;
+        return left(AppFailure(resBodyMap["detail"]));
+      }
+      resBodyMap = resBodyMap as List;
+      List<SongModel> songList = [];
+      for (final map in resBodyMap) {
+        songList.add(SongModel.fromMap(map));
+      }
+      return right(songList);
+    } catch (e) {
+      return left(AppFailure(e.toString()));
+    }
+  }
 }

@@ -6,6 +6,6 @@ class LibraryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return  Scaffold(body: Center(child: Text("library page"),),);
+    return Scaffold(body: Center(child: Text("library page")));
   }
 }

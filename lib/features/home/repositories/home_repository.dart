@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:client/features/home/model/song_model.dart';
+import 'dart:convert';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:client/core/failure/failure.dart';
 import 'package:client/core/constants/server_constant.dart';
+import 'package:client/features/home/model/song_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_repository.g.dart';

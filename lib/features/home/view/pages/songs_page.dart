@@ -1,8 +1,8 @@
-import 'package:client/core/providers/current_song_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/theme/pallete.dart';
 import 'package:client/core/widgets/loader.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:client/core/providers/current_song_notifier.dart';
 import 'package:client/features/home/view_model/home_view_model.dart';
 
 class SongsPage extends ConsumerWidget {

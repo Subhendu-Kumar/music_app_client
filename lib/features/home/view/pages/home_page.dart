@@ -1,9 +1,9 @@
-import 'package:client/core/theme/pallete.dart';
-import 'package:client/features/home/view/pages/library_page.dart';
-import 'package:client/features/home/view/pages/songs_page.dart';
-import 'package:client/features/home/view/widgets/music_slab.dart';
 import 'package:flutter/material.dart';
+import 'package:client/core/theme/pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:client/features/home/view/pages/songs_page.dart';
+import 'package:client/features/home/view/pages/library_page.dart';
+import 'package:client/features/home/view/widgets/music_slab.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
